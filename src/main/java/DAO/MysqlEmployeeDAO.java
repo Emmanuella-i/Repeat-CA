@@ -85,11 +85,34 @@ public class MysqlEmployeeDAO extends MysqlDAO  implements IEmployeeDAOInterface
 
     @Override
     public void deleteEmployeeByID(String employeeId) throws DAOException {
+        Employee employee = null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
+        try {
+            con = getConnection();
+            String query = "DELETE FROM employee WHERE employeeId = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, Integer.parseInt(employeeId));
+            ps.execute();
+        }
+
+        catch (SQLException e)
+        {
+            throw new DAOException("deleteCatByCatId() " + e.getMessage());
+
+        }
+        finally
+        {
+            this.freeConnection(con);
+        }
     }
 
     @Override
-    public void insertEmployee(Employee employee) throws DAOException {
+    public void insertEmployee(Employee employee) throws DAOException
+    {
+
 
     }
 }
