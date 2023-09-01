@@ -112,7 +112,31 @@ public class MysqlEmployeeDAO extends MysqlDAO  implements IEmployeeDAOInterface
     @Override
     public void insertEmployee(Employee employee) throws DAOException
     {
+        List<Employee> employees = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
+        try {
+            con = getConnection();
+            String query = "INSERT INTO employee (employeeID, name, age, hours) VALUES (?,?,?,?)";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, employee.getEmployeeId());
+            ps.setString(2, employee.getName());
+            ps.setInt(3, employee.getAge());
+            ps.setFloat(4, employee.getHours());
+            ps.execute();
+        }
+
+        catch (SQLException e)
+        {
+            throw new DAOException("insertCat() " + e.getMessage());
+
+        }
+        finally
+        {
+            this.freeConnection(con);
+        }
 
     }
 }
