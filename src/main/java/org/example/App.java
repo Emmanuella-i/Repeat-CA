@@ -17,6 +17,20 @@ public class App
         System.out.println( "Hello World!" );
         IEmployeeDAOInterface employeeDAO = new MysqlEmployeeDAO();
         findAndPrintAllEmployees(employeeDAO);
+        findAndPrintEmployeeById(employeeDAO, "1");
+    }
+
+    private static void findAndPrintEmployeeById(IEmployeeDAOInterface employeeDAO, String employeeId)
+    {
+        try
+        {
+            Employee employee = employeeDAO.findEmployeeByID(employeeId);
+            System.out.println(employee);
+        }
+        catch (DAOException e)
+        {
+            System.out.println("Failed to get employee by id " + e.getMessage());
+        }
     }
 
 

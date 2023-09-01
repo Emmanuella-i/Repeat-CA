@@ -49,7 +49,38 @@ public class MysqlEmployeeDAO extends MysqlDAO  implements IEmployeeDAOInterface
 
     @Override
     public Employee findEmployeeByID(String employeeId) throws DAOException {
-        return null;
+        Employee employee = null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try
+        {
+            con = getConnection();
+            String query = "SELECT * FROM employee WHERE employeeId = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, employeeId);
+            rs = ps.executeQuery();
+
+            if (rs.next())
+            {
+                String name = rs.getString("name");
+                int employeeID = rs.getInt("employeeId");
+                int age = rs.getInt("age");
+                float hours = rs.getFloat("hours");
+                employee = new Employee(employeeID, name, age, hours);
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new DAOException("findEmployeeById() " + e.getMessage());
+        }
+        finally
+        {
+            this.freeConnection(con);
+        }
+        return employee;
+
     }
 
     @Override
