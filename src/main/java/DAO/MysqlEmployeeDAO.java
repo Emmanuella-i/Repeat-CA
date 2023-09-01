@@ -1,6 +1,7 @@
 package DAO;
 import Exceptions.DAOException;
 import DTO.Employee;
+import com.google.gson.Gson;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -100,7 +101,7 @@ public class MysqlEmployeeDAO extends MysqlDAO  implements IEmployeeDAOInterface
 
         catch (SQLException e)
         {
-            throw new DAOException("deleteCatByCatId() " + e.getMessage());
+            throw new DAOException("deleteEmployeeById() " + e.getMessage());
 
         }
         finally
@@ -130,7 +131,7 @@ public class MysqlEmployeeDAO extends MysqlDAO  implements IEmployeeDAOInterface
 
         catch (SQLException e)
         {
-            throw new DAOException("insertCat() " + e.getMessage());
+            throw new DAOException("insertEmployee() " + e.getMessage());
 
         }
         finally
@@ -139,4 +140,13 @@ public class MysqlEmployeeDAO extends MysqlDAO  implements IEmployeeDAOInterface
         }
 
     }
+
+    @Override
+    public String findAllEmployeesJson() throws DAOException
+    {
+        List<Employee> employees = findAllEmployees();
+        String json = new Gson().toJson(employees);
+        return json;
+    }
+
 }

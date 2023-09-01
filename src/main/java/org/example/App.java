@@ -20,6 +20,22 @@ public class App
         findAndPrintEmployeeById(employeeDAO, "1");
         deleteEmployeeById(employeeDAO, "1");
         //insertEmployee(employeeDAO, );
+        findAllEmployeesJSON(employeeDAO);
+    }
+
+    private static void findAllEmployeesJSON(IEmployeeDAOInterface employeeDAO)
+    {
+        try
+        {
+            String employees = employeeDAO.findAllEmployeesJson();
+
+                System.out.println(employees);
+
+        }
+        catch (DAOException e)
+        {
+            System.out.println("Failed to get all employees " + e.getMessage());
+        }
     }
 
     private static void findAndPrintEmployeeById(IEmployeeDAOInterface employeeDAO, String employeeId)
@@ -75,4 +91,6 @@ public class App
             System.out.println("Failed to insert Employee " + e.getMessage());
         }
     }
+
+
 }

@@ -11,4 +11,7 @@ public interface IEmployeeDAOInterface
     public Employee findEmployeeByID(String employeeId) throws DAOException;
     public void deleteEmployeeByID(String employeeId) throws DAOException;
     public void insertEmployee(Employee employee) throws DAOException;
+
+
+    String findAllEmployeesJson() throws DAOException;
 }
