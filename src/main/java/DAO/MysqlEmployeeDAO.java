@@ -149,4 +149,12 @@ public class MysqlEmployeeDAO extends MysqlDAO  implements IEmployeeDAOInterface
         return json;
     }
 
+    @Override
+    public String findEmployeeByIdJson(String employeeId) throws DAOException
+    {
+        Employee employee = findEmployeeByID(employeeId);
+        String json = new Gson().toJson(employee);
+        return json;
+    }
+
 }

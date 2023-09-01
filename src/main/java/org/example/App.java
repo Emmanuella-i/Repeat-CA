@@ -17,10 +17,28 @@ public class App
         System.out.println( "Hello World!" );
         IEmployeeDAOInterface employeeDAO = new MysqlEmployeeDAO();
         findAndPrintAllEmployees(employeeDAO);
-        findAndPrintEmployeeById(employeeDAO, "1");
+        findAndPrintEmployeeById(employeeDAO, "80");
         deleteEmployeeById(employeeDAO, "1");
         //insertEmployee(employeeDAO, );
         findAllEmployeesJSON(employeeDAO);
+        findEmployeeByIdJSON(employeeDAO, "80");
+    }
+
+    private static void findEmployeeByIdJSON(IEmployeeDAOInterface employeeDAO, String number)
+    {
+        try
+        {
+
+            String employee = employeeDAO.findEmployeeByIdJson(number);
+            System.out.println(employee);
+
+        }
+        catch (DAOException e)
+        {
+            System.out.println("Failed to get employee " + e.getMessage());
+        }
+
+
     }
 
     private static void findAllEmployeesJSON(IEmployeeDAOInterface employeeDAO)

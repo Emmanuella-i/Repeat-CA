@@ -14,4 +14,6 @@ public interface IEmployeeDAOInterface
 
 
     String findAllEmployeesJson() throws DAOException;
+
+    String findEmployeeByIdJson(String catId) throws DAOException;
 }
