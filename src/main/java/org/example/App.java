@@ -18,6 +18,7 @@ public class App
         IEmployeeDAOInterface employeeDAO = new MysqlEmployeeDAO();
         findAndPrintAllEmployees(employeeDAO);
         findAndPrintEmployeeById(employeeDAO, "1");
+        deleteEmployeeById(employeeDAO, "1");
     }
 
     private static void findAndPrintEmployeeById(IEmployeeDAOInterface employeeDAO, String employeeId)
@@ -47,6 +48,18 @@ public class App
         catch (DAOException e)
         {
             System.out.println("Failed to get all employees " + e.getMessage());
+        }
+    }
+
+    private static void deleteEmployeeById(IEmployeeDAOInterface employeeDAO, String employeeId)
+    {
+        try
+        {
+            employeeDAO.deleteEmployeeByID(employeeId);
+        }
+        catch (DAOException e)
+        {
+            System.out.println("Failed to delete Employee by id " + e.getMessage());
         }
     }
 }
