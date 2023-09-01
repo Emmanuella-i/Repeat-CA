@@ -19,6 +19,7 @@ public class App
         findAndPrintAllEmployees(employeeDAO);
         findAndPrintEmployeeById(employeeDAO, "1");
         deleteEmployeeById(employeeDAO, "1");
+        //insertEmployee(employeeDAO, );
     }
 
     private static void findAndPrintEmployeeById(IEmployeeDAOInterface employeeDAO, String employeeId)
@@ -60,6 +61,18 @@ public class App
         catch (DAOException e)
         {
             System.out.println("Failed to delete Employee by id " + e.getMessage());
+        }
+    }
+
+    private static void insertEmployee(IEmployeeDAOInterface employeeDAO, Employee employee)
+    {
+        try
+        {
+            employeeDAO.insertEmployee(employee);
+        }
+        catch (DAOException e)
+        {
+            System.out.println("Failed to insert Employee " + e.getMessage());
         }
     }
 }
