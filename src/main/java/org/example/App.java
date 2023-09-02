@@ -47,11 +47,10 @@ public class App
                     deleteEmployeeById(employeeDAO);
                     break;
                 case ADD_EMPLOYEE:
-
                     insertEmployee(employeeDAO);
                     break;
                 case QUIT:
-                    System.out.println("Shutting down simulator....");
+                    System.out.println("Shutting down application....");
                     quit = true;
                     break;
 
